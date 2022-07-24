@@ -43,9 +43,9 @@ metadata:
 spec:
   ports:
   - nodePort: 32223
-    port: 3000
+    port: 80
     protocol: TCP
-    targetPort: 3000
+    targetPort: 80
   selector:
     app: myweb
   type: NodePort
@@ -67,6 +67,6 @@ spec:
               service: 
                 name: myweb
                 port: 
-                  number: 3000
+                  number: 80
             path: /
             pathType: Prefix
