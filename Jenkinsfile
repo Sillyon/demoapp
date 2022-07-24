@@ -28,8 +28,8 @@ pipeline {
         stage('Deploy Docker Image') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
-                        sh 'docker login -u fcomak -p ${dockerhub}'
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]) {
+                        sh 'docker login -u DOCKER_REGISTRY_USER -p ${DOCKER_REGISTRY_PWD}'
                     }
                     sh 'docker push fcomak/myrepo:latest'
                 }
