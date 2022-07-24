@@ -16,12 +16,6 @@ public class HelloControllerIT {
 	private TestRestTemplate template;
 
     @Test
-    public void getIndex() throws Exception {
-        ResponseEntity<String> response = template.getForEntity("/", String.class);
-        assertThat(response.getBody()).isEqualTo("This is the index!\n");
-    }
-
-    @Test
     public void getHello() throws Exception {
         ResponseEntity<String> response = template.getForEntity("/hello", String.class);
         assertThat(response.getBody()).isEqualTo("Hello World!\n");
