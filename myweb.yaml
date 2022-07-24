@@ -26,7 +26,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: fcomak/myrepo
+      - image: 'fcomak/myrepo:latest'
         imagePullPolicy: Always
         name: myweb
         env:
@@ -49,26 +49,3 @@ spec:
   selector:
     app: myweb
   type: NodePort
---- 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata: 
-  name: myweb
-  namespace: myweb
-spec:
-  defaultBackend:
-    service:
-      name: myweb
-      port:
-        number: 32223
-  rules:
-  - host: myweb.test
-    http:
-      paths:
-      - backend:
-          service:
-            name: myweb
-            port:
-              number: 80
-        path: /test
-        pathType: Prefix

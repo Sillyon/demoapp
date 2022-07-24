@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                echo 'building project...'
-                sh "./mvnw compile"
+                echo 'cleaning, compiling, and installing project...'
+                sh "./mvnw clean install"
             }
         }
         stage('Test') {

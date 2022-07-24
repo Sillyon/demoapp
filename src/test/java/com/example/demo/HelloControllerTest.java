@@ -21,6 +21,13 @@ public class HelloControllerTest {
 	private MockMvc mvc;
 
 	@Test
+	public void getIndex() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().string(equalTo("This is the index!\n")));
+	}
+
+	@Test
 	public void getHello() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
