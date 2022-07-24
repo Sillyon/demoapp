@@ -29,8 +29,6 @@ spec:
       - image: paulbouwer/hello-kubernetes:1
         imagePullPolicy: Always
         name: myweb
-        ports:
-          containerPort: 32223
         env:
         - name: BUILD_DATE
           value: 'THIS_STRING_IS_REPLACED_DURING_BUILD'
@@ -71,3 +69,6 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
+            backend:
+              serviceName: myweb
+              servicePort: 32223
