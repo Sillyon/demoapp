@@ -11,7 +11,7 @@ metadata:
   name: myweb
   namespace: myweb
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: myweb
