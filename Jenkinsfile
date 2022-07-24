@@ -1,11 +1,7 @@
 pipeline {
     agent any
-    tools {
-        jdk 'jdk'
-        maven '3.8.3'
-    }
     stages {
-        stage("build project") {
+        stage("Build") {
             steps {
                 // git 'https://github.com/Sillyon/demoapp.git'
                 echo "Java VERSION"
