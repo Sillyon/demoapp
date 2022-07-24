@@ -55,20 +55,20 @@ kind: Ingress
 metadata: 
   name: myweb
   namespace: myweb
-spec: 
-  rules: 
-    - 
-      host: myweb.test
-      http: 
-        paths: 
-          - 
-            backend: 
-              service: 
-                name: myweb
-                port: 
-                  number: 80
-            path: /
-            pathType: Prefix
-            backend:
-              serviceName: myweb
-              servicePort: 32223
+spec:
+  defaultBackend:
+    service:
+      name: myweb
+      port:
+        number: 32223
+  rules:
+  - host: myweb.test
+    http:
+      paths:
+      - backend:
+          service:
+            name: myweb
+            port:
+              number: 80
+        path: /test
+        pathType: Prefix
