@@ -35,16 +35,12 @@ pipeline {
                 }
             }
         }
-        stage('Deploy App on k8s') {
+        stage('Deploy App on K8S') {
             steps {
-                sshagent(['k8s']) {
-                    sh "scp -o StrictHostKeyChecking=no springbootapp.yaml fcomak@40.68.140.105:/home/fcomak"
-                    script {
-                        try{
-                            sh "ssh fcomak@40.68.140.105 kubectl create -f ."
-                        }catch(error){
-                            sh "ssh fcomak@40.68.140.105 kubectl create -f ."
-                        }
+                script {
+                    withKubeConfig([credentialsId: 'mykubeconfig']) {
+                        sh 'sed -ie "s/THIS_STRING_IS_REPLACED_DURING_BUILD/$(date)/g" myweb.yaml'
+                        sh 'kubectl apply -f myweb.yaml'
                     }
                 }
             }
