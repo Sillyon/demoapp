@@ -42,7 +42,7 @@ metadata:
   namespace: myweb
 spec:
   ports:
-  - nodePort: 32223
+  - nodePort: 80
     port: 80
     protocol: TCP
     targetPort: 80
