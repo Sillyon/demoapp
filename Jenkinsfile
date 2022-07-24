@@ -17,7 +17,7 @@ pipeline {
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Sillyon/demoapp']]])
             }
-        }fcomak@40.68.140.105
+        }
         stage('Build Docker Image') {
             steps {
                 script {
