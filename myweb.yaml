@@ -11,7 +11,7 @@ metadata:
   name: myweb
   namespace: myweb
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: myweb
@@ -28,6 +28,10 @@ spec:
       containers:
       - image: 'fcomak/myrepo:latest'
         imagePullPolicy: Always
+        ports:
+        - name: myweb
+          containerPort: 8080
+          protocol: TCP
         name: myweb
         env:
         - name: BUILD_DATE
@@ -41,11 +45,13 @@ metadata:
   name: myweb
   namespace: myweb
 spec:
-  ports:
-  - nodePort: 32223
-    port: 80
-    protocol: TCP
-    targetPort: 80
   selector:
     app: myweb
   type: NodePort
+  ports:
+  - nodePort: 32223
+    name: http
+    protocol: TCP
+    targetPort: 8080
+    port: 80
+    
