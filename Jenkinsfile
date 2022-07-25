@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Checkout GitHub Source') {
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Sillyon/demoapp']]])
+            }
+        }
         stage("Build Project") {
             steps {
                 echo 'cleaning, compiling, and installing project...'
@@ -11,11 +16,6 @@ pipeline {
             steps {
                 echo 'running tests...'
                 sh "./mvnw test"
-            }
-        }
-        stage('Checkout GitHub Source') {
-            steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Sillyon/demoapp']]])
             }
         }
         stage('Build Docker Image') {
