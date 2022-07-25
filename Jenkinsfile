@@ -1,19 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage("Build") {
+        stage("Build Project") {
             steps {
                 echo 'cleaning, compiling, and installing project...'
                 sh "./mvnw clean install"
             }
         }
-        stage('Test') {
+        stage('Run Tests') {
             steps {
                 echo 'running tests...'
                 sh "./mvnw test"
             }
         }
-        stage('Build Maven') {
+        stage('Checkout GitHub Source') {
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Sillyon/demoapp']]])
             }
@@ -25,7 +25,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Docker Image') {
+        stage('Push Docker Image') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pwd', usernameVariable: 'uname')]) {
