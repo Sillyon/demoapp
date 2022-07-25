@@ -54,4 +54,26 @@ spec:
     protocol: TCP
     targetPort: 8080
     port: 80
-    
+--- 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: myweb
+  namespace: myweb
+spec:
+  defaultBackend:
+    service:
+      name: myweb
+      port:
+        number: 32223
+  rules:
+  - host: myweb-40-68-140-105.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: myweb
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
